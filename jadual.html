@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KEJOHANAN HOKI MSSB MUKAH 2025</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    img {
+      display: block;
+      margin: 0 auto;
+      max-width: 200px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #add8e6;
+    }
+  </style>
+</head>
+<body>
+  <h1>KEJOHANAN HOKI MSSB MUKAH 2025</h1>
+  <img src="https://i.postimg.cc/MTFGgRwx/Chat-GPT-Image-Jun-14-2025-12-09-31-AM.png" alt="Logo">
+  <h2>Jadual Perlawanan<br><small>3 Julai 2025 hingga 4 Julai 2025</small></h2>
+  <table id="jadual">
+    <thead>
+      <tr>
+        <th>Bil</th>
+        <th>Tarikh</th>
+        <th>Masa</th>
+        <th>Kategori</th>
+        <th>Pasukan 1</th>
+        <th>Pasukan 2</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const kategoriData = [
+      { nama: "Lelaki 18 Tahun", pasukan: ["SMK Belawai", "SMK Normah", "SMK Dalat", "SMK Mukah", "SMK Batang Igan"] },
+      { nama: "Perempuan 15 Tahun", pasukan: ["SMK Belawai", "SMK 3 Rivers", "SMK Mukah", "SMK Btg Igan"] },
+      { nama: "Lelaki 12 Tahun", pasukan: ["Pasukan Daro", "Pasukan Dalat", "Pasukan Mukah"] },
+      { nama: "Lelaki 15 Tahun", pasukan: ["SMK Belawai", "SMK Normah", "SMK 3 Rivers"] },
+      { nama: "Perempuan 18 Tahun", pasukan: ["SMK Belawai", "SMK Normah", "SMK Batang igan"] },
+      { nama: "Perempuan 12 Tahun", pasukan: ["Pasukan Daro", "Pasukan Dalat", "Pasukan Mukah"] }
+    ];
+
+    // Jana semua kombinasi perlawanan setiap kategori
+    const jadualKategori = kategoriData.map(kat => {
+      const games = [];
+      for (let i = 0; i < kat.pasukan.length - 1; i++) {
+        for (let j = i + 1; j < kat.pasukan.length; j++) {
+          games.push({ kategori: kat.nama, p1: kat.pasukan[i], p2: kat.pasukan[j] });
+        }
+      }
+      return games;
+    });
+
+    const tbody = document.querySelector("#jadual tbody");
+    let bil = 1;
+    let index = 0;
+    let moreMatches = true;
+
+    const startTime = 7 * 60; // 7:00 AM in minutes
+    const endTime = 17 * 60 + 30; // 5:30 PM in minutes
+    const matchDuration = 30; // each match takes 30 minutes
+
+    const tarikhList = ["3 Julai 2025", "4 Julai 2025"];
+    let currentTarikhIndex = 0;
+    let currentTime = startTime;
+
+    function formatTime(min) {
+      const h = Math.floor(min / 60);
+      const m = min % 60;
+      return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+    }
+
+    while (moreMatches && currentTarikhIndex < tarikhList.length) {
+      moreMatches = false;
+      for (let i = 0; i < jadualKategori.length; i++) {
+        if (index < jadualKategori[i].length) {
+          const match = jadualKategori[i][index];
+          const row = `<tr>
+                        <td>${bil++}</td>
+                        <td>${tarikhList[currentTarikhIndex]}</td>
+                        <td>${formatTime(currentTime)}</td>
+                        <td>${match.kategori}</td>
+                        <td>${match.p1}</td>
+                        <td>${match.p2}</td>
+                      </tr>`;
+          tbody.insertAdjacentHTML("beforeend", row);
+
+          currentTime += matchDuration;
+          if (currentTime + matchDuration > endTime) {
+            currentTarikhIndex++;
+            currentTime = startTime;
+          }
+          moreMatches = true;
+        }
+      }
+      index++;
+    }
+  </script>
+</body>
+</html>

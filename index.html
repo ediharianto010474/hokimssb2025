@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Analisis Pertandingan Hoki Bahagian Mukah 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -12,53 +13,53 @@
             --light-color: #ecf0f1;
             --dark-color: #2c3e50;
         }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         body {
             background-color: #f5f5f5;
             color: var(--dark-color);
             line-height: 1.6;
         }
-        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        
         header {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: white;
+            color: black;
             padding: 20px 0;
             text-align: center;
             margin-bottom: 30px;
             border-radius: 5px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        
+        .logo {
+            height: 80px;
+            margin-bottom: 15px;
+        }
         h1 {
             font-size: 2.2rem;
             margin-bottom: 10px;
+            color: black;
         }
-        
         h2 {
             color: var(--secondary-color);
             margin: 25px 0 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--secondary-color);
         }
-        
         h3 {
             color: var(--primary-color);
             margin: 20px 0 10px;
         }
-        
         .category-section {
             background-color: white;
             border-radius: 5px;
@@ -66,55 +67,24 @@
             margin-bottom: 30px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
-        .teams-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .team-card {
-            background-color: var(--light-color);
-            padding: 12px 15px;
-            border-radius: 5px;
-            font-weight: 500;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            flex: 1 0 calc(33.333% - 15px);
-            min-width: 200px;
-        }
-        
-        .matches-container {
-            width: 100%;
-            overflow-x: auto;
-        }
-        
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
         }
-        
         th, td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
-        
         th {
             background-color: var(--primary-color);
             color: white;
             font-weight: 600;
         }
-        
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
         tr:hover {
             background-color: #f1f1f1;
         }
-        
         .btn {
             display: inline-block;
             background-color: var(--secondary-color);
@@ -126,30 +96,37 @@
             font-size: 16px;
             transition: background-color 0.3s;
             margin: 5px;
+            text-decoration: none;
         }
-        
         .btn:hover {
             background-color: #2980b9;
         }
-        
         .btn-accent {
             background-color: var(--accent-color);
         }
-        
         .btn-accent:hover {
             background-color: #c0392b;
         }
-        
+        .btn-print {
+            background-color: #27ae60;
+        }
+        .btn-print:hover {
+            background-color: #219955;
+        }
+        .btn-schedule {
+            background-color: #9b59b6;
+        }
+        .btn-schedule:hover {
+            background-color: #8e44ad;
+        }
         .input-group {
             margin: 15px 0;
         }
-        
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: 500;
         }
-        
         select, input {
             width: 100%;
             padding: 10px;
@@ -157,7 +134,6 @@
             border-radius: 5px;
             font-size: 16px;
         }
-        
         .result-section {
             margin-top: 20px;
             padding: 15px;
@@ -165,679 +141,404 @@
             border-radius: 5px;
             border-left: 4px solid var(--secondary-color);
         }
-        
-        .standings {
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
             margin-top: 20px;
         }
-        
-        .winner {
-            font-weight: bold;
-            color: var(--accent-color);
+        .top-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
         }
-        
-        @media (max-width: 768px) {
-            .team-card {
-                flex: 1 0 100%;
+        @media print {
+            body * {
+                visibility: hidden;
             }
-            
-            h1 {
-                font-size: 1.8rem;
+            .printable-category, .printable-category * {
+                visibility: visible;
+            }
+            .printable-category {
+                position: relative;
+                left: 0;
+                top: 0;
+                width: 100%;
+                page-break-after: always;
+            }
+            .no-print, .action-buttons, .top-buttons {
+                display: none !important;
+            }
+            @page {
+                size: landscape;
+                margin: 1cm;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Sistem Analisis Pertandingan Hoki</h1>
-            <p>Bahagian Mukah 2025</p>
-        </header>
-        
-        <section class="category-section">
-            <h2>Kategori Lelaki Bawah 15 Tahun</h2>
-            <div class="teams-container">
-                <div class="team-card">1. SMK Belawai</div>
-                <div class="team-card">2. SMK Normah</div>
-                <div class="team-card">3. SMK 3 Rivers</div>
-            </div>
-            
-            <h3>Jadual Perlawanan</h3>
-            <div class="matches-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Perlawanan</th>
-                            <th>Pasukan 1</th>
-                            <th>Pasukan 2</th>
-                            <th>Tarikh</th>
-                            <th>Masa</th>
-                            <th>Keputusan</th>
-                        </tr>
-                    </thead>
-                    <tbody id="male15Matches">
-                        <!-- Matches will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="standings">
-                <h3>Kedudukan Liga</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pasukan</th>
-                            <th>P</th>
-                            <th>M</th>
-                            <th>S</th>
-                            <th>K</th>
-                            <th>Gol</th>
-                            <th>Mata</th>
-                        </tr>
-                    </thead>
-                    <tbody id="male15Standings">
-                        <!-- Standings will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        
-        <section class="category-section">
-            <h2>Kategori Lelaki Bawah 18 Tahun</h2>
-            <div class="teams-container">
-                <div class="team-card">1. SMK Belawai</div>
-                <div class="team-card">2. SMK Normah</div>
-                <div class="team-card">3. SMK Dalat</div>
-                <div class="team-card">4. SMK Mukah</div>
-                <div class="team-card">5. SMK Batang Igan</div>
-            </div>
-            
-            <h3>Jadual Perlawanan</h3>
-            <div class="matches-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Perlawanan</th>
-                            <th>Pasukan 1</th>
-                            <th>Pasukan 2</th>
-                            <th>Tarikh</th>
-                            <th>Masa</th>
-                            <th>Keputusan</th>
-                        </tr>
-                    </thead>
-                    <tbody id="male18Matches">
-                        <!-- Matches will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="standings">
-                <h3>Kedudukan Liga</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pasukan</th>
-                            <th>P</th>
-                            <th>M</th>
-                            <th>S</th>
-                            <th>K</th>
-                            <th>Gol</th>
-                            <th>Mata</th>
-                        </tr>
-                    </thead>
-                    <tbody id="male18Standings">
-                        <!-- Standings will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        
-        <section class="category-section">
-            <h2>Kategori Perempuan Bawah 15 Tahun</h2>
-            <div class="teams-container">
-                <div class="team-card">1. SMK Normah</div>
-                <div class="team-card">2. SMK Belawai</div>
-                <div class="team-card">3. SMK 3 Rivers</div>
-                <div class="team-card">4. SMK Mukah</div>
-                <div class="team-card">5. SMK Btg Igan</div>
-            </div>
-            
-            <h3>Jadual Perlawanan</h3>
-            <div class="matches-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Perlawanan</th>
-                            <th>Pasukan 1</th>
-                            <th>Pasukan 2</th>
-                            <th>Tarikh</th>
-                            <th>Masa</th>
-                            <th>Keputusan</th>
-                        </tr>
-                    </thead>
-                    <tbody id="female15Matches">
-                        <!-- Matches will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="standings">
-                <h3>Kedudukan Liga</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pasukan</th>
-                            <th>P</th>
-                            <th>M</th>
-                            <th>S</th>
-                            <th>K</th>
-                            <th>Gol</th>
-                            <th>Mata</th>
-                        </tr>
-                    </thead>
-                    <tbody id="female15Standings">
-                        <!-- Standings will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        
-        <section class="category-section">
-            <h2>Kategori Perempuan Bawah 18 Tahun</h2>
-            <div class="teams-container">
-                <div class="team-card">1. SMK Belawai</div>
-                <div class="team-card">2. SMK Normah</div>
-                <div class="team-card">3. SMK Batang Igan</div>
-            </div>
-            
-            <h3>Jadual Perlawanan</h3>
-            <div class="matches-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Perlawanan</th>
-                            <th>Pasukan 1</th>
-                            <th>Pasukan 2</th>
-                            <th>Tarikh</th>
-                            <th>Masa</th>
-                            <th>Keputusan</th>
-                        </tr>
-                    </thead>
-                    <tbody id="female18Matches">
-                        <!-- Matches will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="standings">
-                <h3>Kedudukan Liga</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pasukan</th>
-                            <th>P</th>
-                            <th>M</th>
-                            <th>S</th>
-                            <th>K</th>
-                            <th>Gol</th>
-                            <th>Mata</th>
-                        </tr>
-                    </thead>
-                    <tbody id="female18Standings">
-                        <!-- Standings will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        
-        <section class="category-section">
-            <h2>Kategori Lelaki Bawah 12 Tahun</h2>
-            <div class="teams-container">
-                <div class="team-card">1. Pasukan Daro</div>
-                <div class="team-card">2. Pasukan Dalat</div>
-                <div class="team-card">3. Pasukan Mukah</div>
-            </div>
-            
-            <h3>Jadual Perlawanan</h3>
-            <div class="matches-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Perlawanan</th>
-                            <th>Pasukan 1</th>
-                            <th>Pasukan 2</th>
-                            <th>Tarikh</th>
-                            <th>Masa</th>
-                            <th>Keputusan</th>
-                        </tr>
-                    </thead>
-                    <tbody id="male12Matches">
-                        <!-- Matches will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="standings">
-                <h3>Kedudukan Liga</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pasukan</th>
-                            <th>P</th>
-                            <th>M</th>
-                            <th>S</th>
-                            <th>K</th>
-                            <th>Gol</th>
-                            <th>Mata</th>
-                        </tr>
-                    </thead>
-                    <tbody id="male12Standings">
-                        <!-- Standings will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        
-        <section class="category-section">
-            <h2>Kategori Perempuan Bawah 12 Tahun</h2>
-            <div class="teams-container">
-                <div class="team-card">1. Pasukan Daro</div>
-                <div class="team-card">2. Pasukan Dalat</div>
-                <div class="team-card">3. Pasukan Mukah</div>
-            </div>
-            
-            <h3>Jadual Perlawanan</h3>
-            <div class="matches-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Perlawanan</th>
-                            <th>Pasukan 1</th>
-                            <th>Pasukan 2</th>
-                            <th>Tarikh</th>
-                            <th>Masa</th>
-                            <th>Keputusan</th>
-                        </tr>
-                    </thead>
-                    <tbody id="female12Matches">
-                        <!-- Matches will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="standings">
-                <h3>Kedudukan Liga</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pasukan</th>
-                            <th>P</th>
-                            <th>M</th>
-                            <th>S</th>
-                            <th>K</th>
-                            <th>Gol</th>
-                            <th>Mata</th>
-                        </tr>
-                    </thead>
-                    <tbody id="female12Standings">
-                        <!-- Standings will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        
-        <section class="category-section">
-            <h2>Kemaskini Keputusan</h2>
-            <div class="input-group">
-                <label for="category">Pilih Kategori:</label>
-                <select id="category">
-                    <option value="male15">Lelaki Bawah 15 Tahun</option>
-                    <option value="male18">Lelaki Bawah 18 Tahun</option>
-                    <option value="female15">Perempuan Bawah 15 Tahun</option>
-                    <option value="female18">Perempuan Bawah 18 Tahun</option>
-                    <option value="male12">Lelaki Bawah 12 Tahun</option>
-                    <option value="female12">Perempuan Bawah 12 Tahun</option>
-                </select>
-            </div>
-            
-            <div class="input-group">
-                <label for="match">Pilih Perlawanan:</label>
-                <select id="match">
-                    <!-- Options will be populated by JS -->
-                </select>
-            </div>
-            
-            <div class="input-group">
-                <label for="score1">Skor Pasukan 1:</label>
-                <input type="number" id="score1" min="0" value="0">
-            </div>
-            
-            <div class="input-group">
-                <label for="score2">Skor Pasukan 2:</label>
-                <input type="number" id="score2" min="0" value="0">
-            </div>
-            
-            <button class="btn" id="updateResult">Kemaskini Keputusan</button>
-            <button class="btn btn-accent" id="resetAll">Reset Semua Keputusan</button>
-            
-            <div class="result-section" id="resultMessage">
-                Pilih perlawanan dan masukkan keputusan untuk dikemaskini.
-            </div>
-        </section>
+<div class="container">
+    <header>
+        <img src="https://i.postimg.cc/MTFGgRwx/Chat-GPT-Image-Jun-14-2025-12-09-31-AM.png" alt="Logo Pertandingan Hoki" class="logo">
+        <h1>Sistem Analisis Pertandingan Hoki</h1>
+        <p>Bahagian Mukah 2025 | 3-4 Julai 2025 | 7:00 pagi - 5:30 petang</p>
+    </header>
+
+    <!-- Butang Jadual Perlawanan -->
+    <div class="top-buttons">
+        <a href="jadual.html" class="btn btn-schedule"><i class="fas fa-calendar-alt"></i> Jadual Perlawanan</a>
     </div>
 
-    <script>
-        // Data for all categories
-        const tournamentData = {
-            male15: {
-                name: "Lelaki Bawah 15 Tahun",
-                teams: ["SMK Belawai", "SMK Normah", "SMK 3 Rivers"],
-                matches: [],
-                standings: {}
-            },
-            male18: {
-                name: "Lelaki Bawah 18 Tahun",
-                teams: ["SMK Belawai", "SMK Normah", "SMK Dalat", "SMK Mukah", "SMK Batang Igan"],
-                matches: [],
-                standings: {}
-            },
-            female15: {
-                name: "Perempuan Bawah 15 Tahun",
-                teams: ["SMK Normah", "SMK Belawai", "SMK 3 Rivers", "SMK Mukah", "SMK Btg Igan"],
-                matches: [],
-                standings: {}
-            },
-            female18: {
-                name: "Perempuan Bawah 18 Tahun",
-                teams: ["SMK Belawai", "SMK Normah", "SMK Batang Igan"],
-                matches: [],
-                standings: {}
-            },
-            male12: {
-                name: "Lelaki Bawah 12 Tahun",
-                teams: ["Pasukan Daro", "Pasukan Dalat", "Pasukan Mukah"],
-                matches: [],
-                standings: {}
-            },
-            female12: {
-                name: "Perempuan Bawah 12 Tahun",
-                teams: ["Pasukan Daro", "Pasukan Dalat", "Pasukan Mukah"],
-                matches: [],
-                standings: {}
-            }
-        };
+    <!-- Seksyen Kemaskini Keputusan -->
+    <section class="category-section">
+        <h2>Kemaskini Keputusan</h2>
+        <div class="input-group">
+            <label for="category">Pilih Kategori:</label>
+            <select id="category">
+                <option value="male15">Lelaki Bawah 15 Tahun</option>
+                <option value="male18">Lelaki Bawah 18 Tahun</option>
+                <option value="female15">Perempuan Bawah 15 Tahun</option>
+                <option value="female18">Perempuan Bawah 18 Tahun</option>
+                <option value="male12">Lelaki Bawah 12 Tahun</option>
+                <option value="female12">Perempuan Bawah 12 Tahun</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="match">Pilih Perlawanan:</label>
+            <select id="match"></select>
+        </div>
+        <div class="input-group">
+            <label for="score1">Skor Pasukan 1:</label>
+            <input type="number" id="score1" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label for="score2">Skor Pasukan 2:</label>
+            <input type="number" id="score2" min="0" value="0">
+        </div>
+        <div class="action-buttons">
+            <button class="btn" id="updateResult">Kemaskini Keputusan</button>
+            <div>
+                <button class="btn btn-accent" id="resetAll">Reset Semua Keputusan</button>
+                <button class="btn btn-print" id="printResults"><i class="fas fa-print"></i> Cetak</button>
+            </div>
+        </div>
+        <div class="result-section" id="resultMessage">
+            Pilih perlawanan dan masukkan keputusan untuk dikemaskini.
+        </div>
+    </section>
 
-        // Initialize all tournaments
-        function initializeTournaments() {
-            for (const category in tournamentData) {
-                const data = tournamentData[category];
+    <!-- Paparan Kategori Pasukan -->
+    <div id="categoriesContainer"></div>
+
+    <!-- Butang Ambil Data -->
+    <section class="category-section no-print">
+        <button class="btn btn-full-results" id="loadOldData">Ambil Data Tarikh 3 Julai</button>
+    </section>
+</div>
+
+<!-- Tempat cetakan paparan penuh -->
+<div id="printSections"></div>
+
+<script>
+    const tournamentData = {
+        male15: { name: "Lelaki Bawah 15 Tahun", teams: ["SMK Belawai", "SMK Normah", "SMK 3 Rivers"], matches: [], standings: {} },
+        male18: { name: "Lelaki Bawah 18 Tahun", teams: ["SMK Belawai", "SMK Normah", "SMK Dalat", "SMK Mukah", "SMK Batang Igan"], matches: [], standings: {} },
+        female15: { name: "Perempuan Bawah 15 Tahun", teams: ["SMK Belawai", "SMK 3 Rivers", "SMK Mukah", "SMK Btg Igan"], matches: [], standings: {} },
+        female18: { name: "Perempuan Bawah 18 Tahun", teams: ["SMK Belawai", "SMK Normah", "SMK Batang Igan"], matches: [], standings: {} },
+        male12: { name: "Lelaki Bawah 12 Tahun", teams: ["Pasukan Daro", "Pasukan Dalat", "Pasukan Mukah"], matches: [], standings: {} },
+        female12: { name: "Perempuan Bawah 12 Tahun", teams: ["Pasukan Daro", "Pasukan Dalat", "Pasukan Mukah"], matches: [], standings: {} }
+    };
+
+    function initializeTournaments() {
+        loadFromLocalStorage();
+        const container = document.getElementById('categoriesContainer');
+        for (const category in tournamentData) {
+            const data = tournamentData[category];
+            if (!data.matches.length) {
                 data.matches = generateRoundRobinMatches(data.teams);
+            }
+            if (!Object.keys(data.standings).length) {
                 data.standings = initializeStandings(data.teams);
+            }
+            renderCategory(category, container);
+            renderMatches(category);
+            renderStandings(category);
+        }
+        updateMatchDropdown();
+    }
+
+    function generateRoundRobinMatches(teams) {
+        const matches = [];
+        const teamCount = teams.length;
+        const startDate = new Date(2025, 6, 3); // 3 Julai 2025
+        const timeSlots = ['07:00', '07:30', '08:00', '08:30', '09:00'];
+        let dateIndex = 0;
+        let timeIndex = 0;
+
+        for (let i = 0; i < teamCount - 1; i++) {
+            for (let j = i + 1; j < teamCount; j++) {
+                const currentDate = new Date(startDate);
+                currentDate.setDate(startDate.getDate() + dateIndex);
+                const dateStr = `${currentDate.getDate()} ${getMonthName(currentDate.getMonth())} ${currentDate.getFullYear()}`;
+                const timeStr = timeSlots[timeIndex % timeSlots.length];
+
+                matches.push({
+                    team1: teams[i],
+                    team2: teams[j],
+                    score1: null,
+                    score2: null,
+                    date: dateStr,
+                    time: timeStr,
+                    completed: false
+                });
+
+                timeIndex++;
+                if (timeIndex % timeSlots.length === 0) dateIndex++;
+            }
+        }
+        return matches;
+    }
+
+    function getMonthName(monthIndex) {
+        const months = [
+            "Januari", "Februari", "Mac", "April", "Mei", "Jun",
+            "Julai", "Ogos", "September", "Oktober", "November", "Disember"
+        ];
+        return months[monthIndex];
+    }
+
+    function initializeStandings(teams) {
+        const standings = {};
+        teams.forEach(team => {
+            standings[team] = {
+                played: 0,
+                wins: 0,
+                draws: 0,
+                losses: 0,
+                goalsFor: 0,
+                goalsAgainst: 0,
+                points: 0
+            };
+        });
+        return standings;
+    }
+
+    function recalculateStandings(category) {
+        const data = tournamentData[category];
+        data.standings = initializeStandings(data.teams);
+
+        data.matches.forEach(match => {
+            if (match.completed) {
+                const s = data.standings;
+                const { team1, team2, score1, score2 } = match;
+
+                s[team1].played += 1;
+                s[team1].goalsFor += score1;
+                s[team1].goalsAgainst += score2;
+
+                s[team2].played += 1;
+                s[team2].goalsFor += score2;
+                s[team2].goalsAgainst += score1;
+
+                if (score1 > score2) {
+                    s[team1].wins += 1;
+                    s[team1].points += 3;
+                    s[team2].losses += 1;
+                } else if (score1 < score2) {
+                    s[team2].wins += 1;
+                    s[team2].points += 3;
+                    s[team1].losses += 1;
+                } else {
+                    s[team1].draws += 1;
+                    s[team2].draws += 1;
+                    s[team1].points += 1;
+                    s[team2].points += 1;
+                }
+            }
+        });
+    }
+
+    function renderCategory(category, container) {
+        const data = tournamentData[category];
+        const section = document.createElement('section');
+        section.className = 'category-section printable-category';
+        section.id = `${category}Section`;
+        section.innerHTML = `
+            <h2>${data.name}</h2>
+            <div class="matches-container">
+                <h3>Jadual Perlawanan</h3>
+                <table>
+                    <thead><tr>
+                        <th>Perlawanan</th>
+                        <th>Pasukan 1</th>
+                        <th>Pasukan 2</th>
+                        <th>Tarikh</th>
+                        <th>Masa</th>
+                        <th>Keputusan</th>
+                    </tr></thead>
+                    <tbody id="${category}Matches"></tbody>
+                </table>
+            </div>
+            <div class="standings">
+                <h3>Kedudukan Liga</h3>
+                <table>
+                    <thead><tr>
+                        <th>Nama Pasukan</th>
+                        <th>M</th>
+                        <th>K</th>
+                        <th>S</th>
+                        <th>Gol</th>
+                        <th>Mata</th>
+                    </tr></thead>
+                    <tbody id="${category}Standings"></tbody>
+                </table>
+            </div>
+        `;
+        container.appendChild(section);
+    }
+
+    function renderMatches(category) {
+        const container = document.getElementById(`${category}Matches`);
+        container.innerHTML = '';
+        tournamentData[category].matches.forEach((match, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>Perlawanan ${index + 1}</td>
+                <td>${match.team1}</td>
+                <td>${match.team2}</td>
+                <td>${match.date}</td>
+                <td>${match.time}</td>
+                <td>${match.completed ? `${match.score1}-${match.score2}` : 'Belum dimainkan'}</td>
+            `;
+            container.appendChild(row);
+        });
+    }
+
+    function renderStandings(category) {
+        const container = document.getElementById(`${category}Standings`);
+        container.innerHTML = '';
+        const standings = Object.entries(tournamentData[category].standings)
+            .map(([team, stats]) => ({ team, ...stats }))
+            .sort((a, b) => b.points - a.points || (b.goalsFor - b.goalsAgainst) - (a.goalsFor - a.goalsAgainst));
+        standings.forEach(stats => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${stats.team}</td>
+                <td>${stats.wins}</td>
+                <td>${stats.losses}</td>
+                <td>${stats.draws}</td>
+                <td>${stats.goalsFor}-${stats.goalsAgainst}</td>
+                <td>${stats.points}</td>
+            `;
+            container.appendChild(row);
+        });
+    }
+
+    function updateMatchDropdown() {
+        const category = document.getElementById('category').value;
+        const matchSelect = document.getElementById('match');
+        matchSelect.innerHTML = '';
+        tournamentData[category].matches.forEach((match, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = `${match.team1} vs ${match.team2} (${match.date}, ${match.time})`;
+            matchSelect.appendChild(option);
+        });
+    }
+
+    function updateMatchResult() {
+        const category = document.getElementById('category').value;
+        const matchIndex = parseInt(document.getElementById('match').value);
+        const score1 = parseInt(document.getElementById('score1').value);
+        const score2 = parseInt(document.getElementById('score2').value);
+        const match = tournamentData[category].matches[matchIndex];
+        match.score1 = score1;
+        match.score2 = score2;
+        match.completed = true;
+        recalculateStandings(category);
+        renderMatches(category);
+        renderStandings(category);
+        saveToLocalStorage();
+        document.getElementById('resultMessage').innerHTML = `<strong>Keputusan berjaya dikemaskini!</strong>`;
+    }
+
+    function resetAllResults() {
+        if (confirm('Adakah anda pasti ingin reset semua keputusan?')) {
+            for (const category in tournamentData) {
+                tournamentData[category].matches.forEach(m => {
+                    m.score1 = null;
+                    m.score2 = null;
+                    m.completed = false;
+                });
+                tournamentData[category].standings = initializeStandings(tournamentData[category].teams);
                 renderMatches(category);
                 renderStandings(category);
             }
-            updateMatchDropdown();
+            saveToLocalStorage();
+            document.getElementById('resultMessage').textContent = 'Semua keputusan telah direset.';
+            document.getElementById('score1').value = 0;
+            document.getElementById('score2').value = 0;
         }
+    }
 
-        // Generate round-robin matches for a list of teams
-        function generateRoundRobinMatches(teams) {
-            const matches = [];
-            const teamCount = teams.length;
-            
-            for (let i = 0; i < teamCount - 1; i++) {
-                for (let j = i + 1; j < teamCount; j++) {
-                    matches.push({
-                        team1: teams[i],
-                        team2: teams[j],
-                        score1: null,
-                        score2: null,
-                        date: generateRandomDate(),
-                        time: generateRandomTime(),
-                        completed: false
-                    });
-                }
-            }
-            
-            return matches;
-        }
+    function saveToLocalStorage() {
+        localStorage.setItem('tournamentData', JSON.stringify(tournamentData));
+    }
 
-        // Initialize standings for teams
-        function initializeStandings(teams) {
-            const standings = {};
-            teams.forEach(team => {
-                standings[team] = {
-                    played: 0,
-                    wins: 0,
-                    draws: 0,
-                    losses: 0,
-                    goalsFor: 0,
-                    goalsAgainst: 0,
-                    points: 0
-                };
-            });
-            return standings;
-        }
-
-        // Generate random date for matches (for demo purposes)
-        function generateRandomDate() {
-            const start = new Date(2025, 5, 1); // June 1, 2025
-            const end = new Date(2025, 5, 30); // June 30, 2025
-            const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-            return date.toLocaleDateString('ms-MY');
-        }
-
-        // Generate random time for matches (for demo purposes)
-        function generateRandomTime() {
-            const hours = 8 + Math.floor(Math.random() * 8); // Between 8am and 4pm
-            const minutes = Math.random() > 0.5 ? '00' : '30';
-            return `${hours}:${minutes}`;
-        }
-
-        // Render matches for a category
-        function renderMatches(category) {
-            const container = document.getElementById(`${category}Matches`);
-            container.innerHTML = '';
-            
-            tournamentData[category].matches.forEach((match, index) => {
-                const row = document.createElement('tr');
-                
-                const matchCell = document.createElement('td');
-                matchCell.textContent = `Perlawanan ${index + 1}`;
-                row.appendChild(matchCell);
-                
-                const team1Cell = document.createElement('td');
-                team1Cell.textContent = match.team1;
-                row.appendChild(team1Cell);
-                
-                const team2Cell = document.createElement('td');
-                team2Cell.textContent = match.team2;
-                row.appendChild(team2Cell);
-                
-                const dateCell = document.createElement('td');
-                dateCell.textContent = match.date;
-                row.appendChild(dateCell);
-                
-                const timeCell = document.createElement('td');
-                timeCell.textContent = match.time;
-                row.appendChild(timeCell);
-                
-                const resultCell = document.createElement('td');
-                if (match.completed) {
-                    resultCell.innerHTML = `<span class="winner">${match.score1}</span> - <span class="winner">${match.score2}</span>`;
-                } else {
-                    resultCell.textContent = "Belum dimainkan";
-                }
-                row.appendChild(resultCell);
-                
-                container.appendChild(row);
-            });
-        }
-
-        // Render standings for a category
-        function renderStandings(category) {
-            const container = document.getElementById(`${category}Standings`);
-            container.innerHTML = '';
-            
-            const standings = tournamentData[category].standings;
-            const teams = Object.keys(standings);
-            
-            // Sort teams by points (descending), then goal difference, then goals scored
-            teams.sort((a, b) => {
-                const teamA = standings[a];
-                const teamB = standings[b];
-                
-                // Compare points
-                if (teamB.points !== teamA.points) {
-                    return teamB.points - teamA.points;
-                }
-                
-                // Compare goal difference
-                const diffA = teamA.goalsFor - teamA.goalsAgainst;
-                const diffB = teamB.goalsFor - teamB.goalsAgainst;
-                if (diffB !== diffA) {
-                    return diffB - diffA;
-                }
-                
-                // Compare goals scored
-                return teamB.goalsFor - teamA.goalsFor;
-            });
-            
-            teams.forEach(team => {
-                const stats = standings[team];
-                const row = document.createElement('tr');
-                
-                const teamCell = document.createElement('td');
-                teamCell.textContent = team;
-                row.appendChild(teamCell);
-                
-                const playedCell = document.createElement('td');
-                playedCell.textContent = stats.played;
-                row.appendChild(playedCell);
-                
-                const winsCell = document.createElement('td');
-                winsCell.textContent = stats.wins;
-                row.appendChild(winsCell);
-                
-                const drawsCell = document.createElement('td');
-                drawsCell.textContent = stats.draws;
-                row.appendChild(drawsCell);
-                
-                const lossesCell = document.createElement('td');
-                lossesCell.textContent = stats.losses;
-                row.appendChild(lossesCell);
-                
-                const goalsCell = document.createElement('td');
-                goalsCell.textContent = `${stats.goalsFor}-${stats.goalsAgainst}`;
-                row.appendChild(goalsCell);
-                
-                const pointsCell = document.createElement('td');
-                pointsCell.textContent = stats.points;
-                row.appendChild(pointsCell);
-                
-                container.appendChild(row);
-            });
-        }
-
-        // Update match dropdown based on selected category
-        function updateMatchDropdown() {
-            const category = document.getElementById('category').value;
-            const matchSelect = document.getElementById('match');
-            
-            matchSelect.innerHTML = '';
-            
-            tournamentData[category].matches.forEach((match, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = `${match.team1} vs ${match.team2} (${match.date}, ${match.time})`;
-                matchSelect.appendChild(option);
-            });
-        }
-
-        // Update match result
-        function updateMatchResult() {
-            const category = document.getElementById('category').value;
-            const matchIndex = parseInt(document.getElementById('match').value);
-            const score1 = parseInt(document.getElementById('score1').value);
-            const score2 = parseInt(document.getElementById('score2').value);
-            
-            const match = tournamentData[category].matches[matchIndex];
-            const standings = tournamentData[category].standings;
-            
-            // Update match data
-            match.score1 = score1;
-            match.score2 = score2;
-            match.completed = true;
-            
-            // Update standings for team1
-            standings[match.team1].played += 1;
-            standings[match.team1].goalsFor += score1;
-            standings[match.team1].goalsAgainst += score2;
-            
-            // Update standings for team2
-            standings[match.team2].played += 1;
-            standings[match.team2].goalsFor += score2;
-            standings[match.team2].goalsAgainst += score1;
-            
-            // Determine result and update points
-            if (score1 > score2) {
-                standings[match.team1].wins += 1;
-                standings[match.team1].points += 3;
-                standings[match.team2].losses += 1;
-            } else if (score1 < score2) {
-                standings[match.team2].wins += 1;
-                standings[match.team2].points += 3;
-                standings[match.team1].losses += 1;
-            } else {
-                standings[match.team1].draws += 1;
-                standings[match.team2].draws += 1;
-                standings[match.team1].points += 1;
-                standings[match.team2].points += 1;
-            }
-            
-            // Re-render the matches and standings
-            renderMatches(category);
-            renderStandings(category);
-            
-            // Show success message
-            document.getElementById('resultMessage').innerHTML = `
-                <strong>Keputusan berjaya dikemaskini!</strong><br>
-                ${match.team1} ${score1} - ${score2} ${match.team2}
-            `;
-        }
-
-        // Reset all results
-        function resetAllResults() {
-            if (confirm('Adakah anda pasti ingin reset semua keputusan?')) {
-                for (const category in tournamentData) {
-                    const data = tournamentData[category];
-                    
-                    // Reset matches
-                    data.matches.forEach(match => {
-                        match.score1 = null;
-                        match.score2 = null;
-                        match.completed = false;
-                    });
-                    
-                    // Reset standings
-                    data.standings = initializeStandings(data.teams);
-                    
-                    // Re-render
-                    renderMatches(category);
-                    renderStandings(category);
-                }
-                
-                document.getElementById('resultMessage').textContent = 'Semua keputusan telah direset.';
-                document.getElementById('score1').value = 0;
-                document.getElementById('score2').value = 0;
+    function loadFromLocalStorage() {
+        const saved = localStorage.getItem('tournamentData');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            for (const cat in parsed) {
+                tournamentData[cat].matches = parsed[cat].matches;
+                tournamentData[cat].standings = parsed[cat].standings;
             }
         }
+    }
 
-        // Event listeners
-        document.getElementById('category').addEventListener('change', updateMatchDropdown);
-        document.getElementById('updateResult').addEventListener('click', updateMatchResult);
-        document.getElementById('resetAll').addEventListener('click', resetAllResults);
+    function handleLoadOldData() {
+        const saved = localStorage.getItem('tournamentData');
+        if (!saved) {
+            alert("Tiada data untuk tarikh 3 Julai.");
+            return;
+        }
 
-        // Initialize the app
-        window.addEventListener('DOMContentLoaded', initializeTournaments);
-    </script>
+        const parsed = JSON.parse(saved);
+        for (const cat in parsed) {
+            parsed[cat].matches.forEach(match => {
+                if (match.date.includes("3 Julai")) {
+                    match.score1 = null;
+                    match.score2 = null;
+                    match.completed = false;
+                }
+            });
+            tournamentData[cat].matches = parsed[cat].matches;
+            tournamentData[cat].standings = initializeStandings(tournamentData[cat].teams);
+            renderMatches(cat);
+            renderStandings(cat);
+        }
+        document.getElementById('resultMessage').textContent = 'Data tarikh 3 Julai telah dimuat untuk pengisian hari ini.';
+        saveToLocalStorage();
+    }
+
+    function handlePrint() {
+        const printContainer = document.getElementById('printSections');
+        printContainer.innerHTML = '';
+
+        for (const category in tournamentData) {
+            const section = document.getElementById(`${category}Section`).cloneNode(true);
+            printContainer.appendChild(section);
+        }
+
+        window.print();
+    }
+
+    // Event listeners
+    document.getElementById('category').addEventListener('change', updateMatchDropdown);
+    document.getElementById('updateResult').addEventListener('click', updateMatchResult);
+    document.getElementById('resetAll').addEventListener('click', resetAllResults);
+    document.getElementById('loadOldData').addEventListener('click', handleLoadOldData);
+    document.getElementById('printResults').addEventListener('click', handlePrint);
+    document.addEventListener('DOMContentLoaded', initializeTournaments);
+</script>
 </body>
 </html>
