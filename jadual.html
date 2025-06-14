@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KEJOHANAN HOKI MSSB MUKAH 2025</title>
   <style>
+    /* Main Page Styles */
     body {
       font-family: Arial, sans-serif;
       background: #ffffff;
       padding: 20px;
+      margin: 0;
+      line-height: 1.6;
     }
     h1, h2 {
       text-align: center;
@@ -31,12 +34,105 @@
     th {
       background-color: #add8e6;
     }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Print Form Styles */
+    #printFormsContainer {
+      display: none;
+    }
+
+    .print-form-page {
+      width: 100%;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .form-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .form-table td {
+      padding: 15px;
+      vertical-align: top;
+    }
+    .form-table .label {
+      font-weight: bold;
+      width: 30%;
+    }
+    .form-table .value {
+      width: 70%;
+    }
+    .team-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    .team-table td {
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #000;
+    }
+    .spacing {
+      height: 2em;
+    }
+
+    /* Print Specific Styles */
+    @media print {
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body * {
+        visibility: hidden;
+      }
+      #printFormsContainer, 
+      #printFormsContainer * {
+        visibility: visible;
+      }
+      .print-form-page {
+        page-break-after: always;
+        page-break-inside: avoid;
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 20px;
+      }
+      .no-print {
+        display: none !important;
+      }
+      #printFormsContainer {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>KEJOHANAN HOKI MSSB MUKAH 2025</h1>
   <img src="https://i.postimg.cc/MTFGgRwx/Chat-GPT-Image-Jun-14-2025-12-09-31-AM.png" alt="Logo">
   <h2>Jadual Perlawanan<br><small>3 Julai 2025 hingga 4 Julai 2025</small></h2>
+  
+  <button id="cetakButton" class="no-print">Cetak Borang Perlawanan</button>
+  
   <table id="jadual">
     <thead>
       <tr>
@@ -51,7 +147,10 @@
     <tbody></tbody>
   </table>
 
+  <div id="printFormsContainer"></div>
+
   <script>
+    // Match Data
     const kategoriMap = {
       "L15TKB": "Lelaki 15 Tahun",
       "L18TKB": "Lelaki 18 Tahun",
@@ -101,6 +200,7 @@
       { kategori: "P18TKB", masa: "0955AM" }
     ];
 
+    // Generate Schedule Table
     const jadualKategori = {};
     for (const [nama, pasukan] of Object.entries(kategoriData)) {
       jadualKategori[nama] = [];
@@ -125,8 +225,11 @@
       "Perempuan 18 Tahun": []
     };
 
+    const allMatches = [];
+
+    // Populate Schedule Table
     giliran.forEach((slot, idx) => {
-      if (idx >= 20 && currentTarikhIndex === 0) currentTarikhIndex = 1; // Switch to 4 Julai after 20 matches
+      if (idx >= 20 && currentTarikhIndex === 0) currentTarikhIndex = 1;
       const kategoriPenuh = kategoriMap[slot.kategori];
       const senarai = jadualKategori[kategoriPenuh];
       const digunakan = usedMatches[kategoriPenuh];
@@ -139,6 +242,16 @@
         }
       }
       if (match) {
+        const matchData = {
+          no: bil,
+          tarikh: tarikhList[currentTarikhIndex],
+          masa: slot.masa,
+          kategori: kategoriPenuh,
+          pasukan1: match.p1,
+          pasukan2: match.p2
+        };
+        allMatches.push(matchData);
+        
         const row = `<tr>
           <td>${bil++}</td>
           <td>${tarikhList[currentTarikhIndex]}</td>
@@ -149,6 +262,73 @@
         </tr>`;
         tbody.insertAdjacentHTML("beforeend", row);
       }
+    });
+
+    // Print Functionality
+    document.getElementById("cetakButton").addEventListener("click", function() {
+      const printContainer = document.getElementById("printFormsContainer");
+      printContainer.innerHTML = "";
+      
+      allMatches.forEach(match => {
+        const formHTML = `
+          <div class="print-form-page">
+            <h2>KEJOHANAN HOKI MSSB MUKAH 2025</h2>
+            <h3>Borang Perlawanan</h3>
+            
+            <table class="form-table">
+              <tr>
+                <td class="label">Kategori:</td>
+                <td class="value">${match.kategori}</td>
+              </tr>
+              <tr class="spacing"><td colspan="2"></td></tr>
+              <tr>
+                <td class="label">Perlawanan No:</td>
+                <td class="value">${match.no}</td>
+              </tr>
+              <tr class="spacing"><td colspan="2"></td></tr>
+              <tr>
+                <td class="label">Tarikh:</td>
+                <td class="value">${match.tarikh}</td>
+              </tr>
+              <tr class="spacing"><td colspan="2"></td></tr>
+              <tr>
+                <td class="label">Masa Perlawanan:</td>
+                <td class="value">${match.masa}</td>
+              </tr>
+            </table>
+            
+            <table class="team-table">
+              <tr>
+                <td style="width: 45%;"><h3>${match.pasukan1}</h3></td>
+                <td style="width: 10%;">VS</td>
+                <td style="width: 45%;"><h3>${match.pasukan2}</h3></td>
+              </tr>
+            </table>
+            
+            <div style="margin-top: 40px;">
+              <table class="form-table">
+                <tr>
+                  <td class="label">Pengadil:</td>
+                  <td class="value">_________________________</td>
+                </tr>
+                <tr class="spacing"><td colspan="2"></td></tr>
+                <tr>
+                  <td class="label">Tandatangan:</td>
+                  <td class="value">_________________________</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        `;
+        printContainer.insertAdjacentHTML("beforeend", formHTML);
+      });
+
+      // Show print container and trigger print
+      printContainer.style.display = "block";
+      setTimeout(() => {
+        window.print();
+        printContainer.style.display = "none";
+      }, 300); // Increased delay for better rendering
     });
   </script>
 </body>
