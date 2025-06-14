@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: white;
+      background: #ffffff;
       padding: 20px;
     }
     h1, h2 {
@@ -52,70 +52,104 @@
   </table>
 
   <script>
-    const kategoriData = [
-      { nama: "Lelaki 18 Tahun", pasukan: ["SMK Belawai", "SMK Normah", "SMK Dalat", "SMK Mukah", "SMK Batang Igan"] },
-      { nama: "Perempuan 15 Tahun", pasukan: ["SMK Belawai", "SMK 3 Rivers", "SMK Mukah", "SMK Btg Igan"] },
-      { nama: "Lelaki 12 Tahun", pasukan: ["Pasukan Daro", "Pasukan Dalat", "Pasukan Mukah"] },
-      { nama: "Lelaki 15 Tahun", pasukan: ["SMK Belawai", "SMK Normah", "SMK 3 Rivers"] },
-      { nama: "Perempuan 18 Tahun", pasukan: ["SMK Belawai", "SMK Normah", "SMK Batang igan"] },
-      { nama: "Perempuan 12 Tahun", pasukan: ["Pasukan Daro", "Pasukan Dalat", "Pasukan Mukah"] }
+    const kategoriMap = {
+      "L15TKB": "Lelaki 15 Tahun",
+      "L18TKB": "Lelaki 18 Tahun",
+      "P15TKB": "Perempuan 15 Tahun",
+      "P18TKB": "Perempuan 18 Tahun",
+      "L SR": "Lelaki 12 Tahun",
+      "P SR": "Perempuan 12 Tahun"
+    };
+
+    const kategoriData = {
+      "Lelaki 12 Tahun": ["Pasukan Daro", "Pasukan Dalat", "Pasukan Mukah"],
+      "Perempuan 12 Tahun": ["Pasukan Daro", "Pasukan Dalat", "Pasukan Mukah"],
+      "Lelaki 15 Tahun": ["SMK Belawai", "SMK Normah", "SMK 3 Rivers"],
+      "Perempuan 15 Tahun": ["SMK Belawai", "SMK 3 Rivers", "SMK Mukah", "SMK Btg Igan"],
+      "Lelaki 18 Tahun": ["SMK Belawai", "SMK Normah", "SMK Dalat", "SMK Mukah", "SMK Batang Igan"],
+      "Perempuan 18 Tahun": ["SMK Belawai", "SMK Normah", "SMK Batang igan"]
+    };
+
+    const giliran = [
+      { kategori: "L15TKB", masa: "0700AM" },
+      { kategori: "L18TKB", masa: "0725AM" },
+      { kategori: "P15TKB", masa: "0750AM" },
+      { kategori: "P18TKB", masa: "0815AM" },
+      { kategori: "L18TKB", masa: "0840AM" },
+      { kategori: "P15TKB", masa: "0905AM" },
+      { kategori: "L18TKB", masa: "0930AM" },
+      { kategori: "L SR", masa: "0955AM" },
+      { kategori: "P SR", masa: "1020AM" },
+      { kategori: "L15TKB", masa: "1045AM" },
+      { kategori: "L18TKB", masa: "1110AM" },
+      { kategori: "P15TKB", masa: "1135AM" },
+      { kategori: "P18TKB", masa: "0200PM" },
+      { kategori: "L SR", masa: "0225PM" },
+      { kategori: "P SR", masa: "0250PM" },
+      { kategori: "P15TKB", masa: "0340PM" },
+      { kategori: "L18TKB", masa: "0315PM" },
+      { kategori: "P15TKB", masa: "0455PM" },
+      { kategori: "L18TKB", masa: "0430PM" },
+      { kategori: "L15TKB", masa: "0520PM" },
+      { kategori: "P18TKB", masa: "0700AM" },
+      { kategori: "L18TKB", masa: "0725AM" },
+      { kategori: "L18TKB", masa: "0750AM" },
+      { kategori: "P15TKB", masa: "0815AM" },
+      { kategori: "L SR", masa: "0840AM" },
+      { kategori: "P SR", masa: "0905AM" },
+      { kategori: "L18TKB", masa: "0930AM" },
+      { kategori: "P18TKB", masa: "0955AM" }
     ];
 
-    // Jana semua kombinasi perlawanan setiap kategori
-    const jadualKategori = kategoriData.map(kat => {
-      const games = [];
-      for (let i = 0; i < kat.pasukan.length - 1; i++) {
-        for (let j = i + 1; j < kat.pasukan.length; j++) {
-          games.push({ kategori: kat.nama, p1: kat.pasukan[i], p2: kat.pasukan[j] });
+    const jadualKategori = {};
+    for (const [nama, pasukan] of Object.entries(kategoriData)) {
+      jadualKategori[nama] = [];
+      for (let i = 0; i < pasukan.length - 1; i++) {
+        for (let j = i + 1; j < pasukan.length; j++) {
+          jadualKategori[nama].push({ p1: pasukan[i], p2: pasukan[j] });
         }
       }
-      return games;
-    });
+    }
 
     const tbody = document.querySelector("#jadual tbody");
-    let bil = 1;
-    let index = 0;
-    let moreMatches = true;
-
-    const startTime = 7 * 60; // 7:00 AM in minutes
-    const endTime = 17 * 60 + 30; // 5:30 PM in minutes
-    const matchDuration = 30; // each match takes 30 minutes
-
     const tarikhList = ["3 Julai 2025", "4 Julai 2025"];
     let currentTarikhIndex = 0;
-    let currentTime = startTime;
+    let bil = 1;
 
-    function formatTime(min) {
-      const h = Math.floor(min / 60);
-      const m = min % 60;
-      return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
-    }
+    const usedMatches = {
+      "Lelaki 12 Tahun": [],
+      "Perempuan 12 Tahun": [],
+      "Lelaki 15 Tahun": [],
+      "Perempuan 15 Tahun": [],
+      "Lelaki 18 Tahun": [],
+      "Perempuan 18 Tahun": []
+    };
 
-    while (moreMatches && currentTarikhIndex < tarikhList.length) {
-      moreMatches = false;
-      for (let i = 0; i < jadualKategori.length; i++) {
-        if (index < jadualKategori[i].length) {
-          const match = jadualKategori[i][index];
-          const row = `<tr>
-                        <td>${bil++}</td>
-                        <td>${tarikhList[currentTarikhIndex]}</td>
-                        <td>${formatTime(currentTime)}</td>
-                        <td>${match.kategori}</td>
-                        <td>${match.p1}</td>
-                        <td>${match.p2}</td>
-                      </tr>`;
-          tbody.insertAdjacentHTML("beforeend", row);
-
-          currentTime += matchDuration;
-          if (currentTime + matchDuration > endTime) {
-            currentTarikhIndex++;
-            currentTime = startTime;
-          }
-          moreMatches = true;
+    giliran.forEach((slot, idx) => {
+      if (idx >= 20 && currentTarikhIndex === 0) currentTarikhIndex = 1; // Switch to 4 Julai after 20 matches
+      const kategoriPenuh = kategoriMap[slot.kategori];
+      const senarai = jadualKategori[kategoriPenuh];
+      const digunakan = usedMatches[kategoriPenuh];
+      let match;
+      for (const m of senarai) {
+        if (!digunakan.includes(m)) {
+          match = m;
+          digunakan.push(m);
+          break;
         }
       }
-      index++;
-    }
+      if (match) {
+        const row = `<tr>
+          <td>${bil++}</td>
+          <td>${tarikhList[currentTarikhIndex]}</td>
+          <td>${slot.masa}</td>
+          <td>${kategoriPenuh}</td>
+          <td>${match.p1}</td>
+          <td>${match.p2}</td>
+        </tr>`;
+        tbody.insertAdjacentHTML("beforeend", row);
+      }
+    });
   </script>
 </body>
 </html>
