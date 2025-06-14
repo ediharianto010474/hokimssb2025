@@ -6,6 +6,42 @@
     <title>Sistem Analisis Pertandingan Hoki Bahagian Mukah 2025</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        /* Flash Page Styles */
+        #flashPage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        #flashPage img {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        
+        #flashPage p {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* Main Page Styles */
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
@@ -181,7 +217,14 @@
     </style>
 </head>
 <body>
-<div class="container no-print">
+<!-- Flash Page Banner -->
+<div id="flashPage">
+    <img src="https://i.postimg.cc/YS2yT88h/hokimssb2025.jpg" alt="Banner Kejohanan Hoki MSSD Bahagian Mukah 2025">
+    <p>Memuatkan sistem...</p>
+</div>
+
+<!-- Main Content (initially hidden) -->
+<div class="container no-print" style="display: none;">
     <header>
         <img src="https://i.postimg.cc/MTFGgRwx/Chat-GPT-Image-Jun-14-2025-12-09-31-AM.png" alt="Logo Pertandingan Hoki" class="logo">
         <h1>Sistem Analisis Pertandingan Hoki</h1>
@@ -237,6 +280,31 @@
 <div id="printSections"></div>
 
 <script>
+    // Fungsi untuk menyembunyikan flash page dan menampilkan konten utama
+    function showMainContent() {
+        const flashPage = document.getElementById('flashPage');
+        const mainContent = document.querySelector('.container');
+        
+        // Animate flash page out
+        flashPage.style.opacity = '0';
+        
+        // After animation completes
+        setTimeout(function() {
+            flashPage.style.display = 'none';
+            mainContent.style.display = 'block';
+        }, 500);
+    }
+
+    // Tunggu hingga semua konten dimuat sebelum menyembunyikan flash page
+    window.addEventListener('load', function() {
+        // Tunggu minimal 3 detik sebelum menyembunyikan
+        setTimeout(showMainContent, 3000);
+    });
+
+    // Jika pengguna mengklik flash page, langsung tampilkan konten utama
+    document.getElementById('flashPage').addEventListener('click', showMainContent);
+
+    // Tournament Data and Functions
     const tournamentData = {
         male15: { name: "Lelaki Bawah 15 Tahun", teams: ["SMK Belawai", "SMK Normah", "SMK 3 Rivers"], matches: [], standings: {} },
         male18: { name: "Lelaki Bawah 18 Tahun", teams: ["SMK Belawai", "SMK Normah", "SMK Dalat", "SMK Mukah", "SMK Batang Igan"], matches: [], standings: {} },
