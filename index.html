@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Analisis Pertandingan Hoki Bahagian Mukah 2025</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -66,6 +66,7 @@
             padding: 20px;
             margin-bottom: 30px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            page-break-inside: avoid;
         }
         table {
             width: 100%;
@@ -155,41 +156,43 @@
             body * {
                 visibility: hidden;
             }
-            .printable-category, .printable-category * {
+            #printSections, #printSections * {
                 visibility: visible;
             }
-            .printable-category {
+            #printSections {
                 position: relative;
                 left: 0;
                 top: 0;
                 width: 100%;
-                page-break-after: always;
             }
-            .no-print, .action-buttons, .top-buttons {
+            .printable-category#male15Section {
+                page-break-before: always;
+            }
+            header,
+            .no-print,
+            .category-section:not(.printable-category) {
                 display: none !important;
             }
             @page {
-                size: potrait;
+                size: portrait;
                 margin: 1cm;
             }
         }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container no-print">
     <header>
         <img src="https://i.postimg.cc/MTFGgRwx/Chat-GPT-Image-Jun-14-2025-12-09-31-AM.png" alt="Logo Pertandingan Hoki" class="logo">
         <h1>Sistem Analisis Pertandingan Hoki</h1>
         <p>Bahagian Mukah 2025 | 3-4 Julai 2025 | 7:00 pagi - 5:30 petang</p>
     </header>
 
-    <!-- Butang Jadual Perlawanan -->
     <div class="top-buttons">
         <a href="jadual.html" class="btn btn-schedule"><i class="fas fa-calendar-alt"></i> Jadual Perlawanan</a>
     </div>
 
-    <!-- Seksyen Kemaskini Keputusan -->
-    <section class="category-section">
+    <section class="category-section no-print">
         <h2>Kemaskini Keputusan</h2>
         <div class="input-group">
             <label for="category">Pilih Kategori:</label>
@@ -226,16 +229,11 @@
         </div>
     </section>
 
-    <!-- Paparan Kategori Pasukan -->
     <div id="categoriesContainer"></div>
-
-    <!-- Butang Ambil Data -->
     <section class="category-section no-print">
         <button class="btn btn-full-results" id="loadOldData">Ambil Data Tarikh 3 Julai</button>
     </section>
 </div>
-
-<!-- Tempat cetakan paparan penuh -->
 <div id="printSections"></div>
 
 <script>
@@ -522,14 +520,25 @@
 
     function handlePrint() {
         const printContainer = document.getElementById('printSections');
-        printContainer.innerHTML = '';
+        printContainer.innerHTML = ''; // Kosongkan dahulu
 
         for (const category in tournamentData) {
-            const section = document.getElementById(`${category}Section`).cloneNode(true);
-            printContainer.appendChild(section);
+            const section = document.getElementById(`${category}Section`);
+            if (section) {
+                const cloned = section.cloneNode(true);
+                cloned.classList.add('printable-category');
+                printContainer.appendChild(cloned);
+            }
         }
 
+        printContainer.style.display = 'block'; // Paparkan untuk cetakan
+
         window.print();
+
+        window.onafterprint = () => {
+            printContainer.innerHTML = ''; // Kosongkan semula
+            printContainer.style.display = 'none'; // Sembunyikan semula
+        };
     }
 
     // Event listeners
