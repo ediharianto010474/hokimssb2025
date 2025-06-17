@@ -394,8 +394,6 @@
                         <th>Perlawanan</th>
                         <th>Pasukan 1</th>
                         <th>Pasukan 2</th>
-                        <th>Tarikh</th>
-                        <th>Masa</th>
                         <th>Keputusan</th>
                     </tr></thead>
                     <tbody id="${groupId}Matches"></tbody>
@@ -428,8 +426,6 @@
                 <td>Perlawanan ${index + 1}</td>
                 <td>${match.team1}</td>
                 <td>${match.team2}</td>
-                <td>${match.date || ''}</td>
-                <td>${match.time || ''}</td>
                 <td>${match.completed ? `${match.score1}-${match.score2}` : 'Belum dimainkan'}</td>
             `;
             container.appendChild(row);
