@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Analisis Pertandingan Hoki Bahagian Mukah 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+    <style>
+        /* Flash Page Styles */
+        #flashPage {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: white;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease-out;
+        }
+        #flashPage img {
+            width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+        #flashPage p {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; }
+        }
+
+        /* Main Content Styles */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        * {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: white;
+            color: black;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo {
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: black;
+        }
+        h2 {
+            color: var(--secondary-color);
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        h3 {
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+        }
+        .category-section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            page-break-inside: avoid;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin: 5px;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .btn-accent {
+            background-color: var(--accent-color);
+        }
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+        .btn-print {
+            background-color: #27ae60;
+        }
+        .btn-print:hover {
+            background-color: #219955;
+        }
+        .btn-schedule {
+            background-color: #9b59b6;
+        }
+        .btn-schedule:hover {
+            background-color: #8e44ad;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .result-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 5px;
+            border-left: 4px solid var(--secondary-color);
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .top-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printSections, #printSections * {
+                visibility: visible;
+            }
+            #printSections {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .printable-category {
+                page-break-after: always;
+                margin: 0;
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .printable-category:last-child {
+                page-break-after: auto;
+            }
+            header,
+            .no-print,
+            .category-section:not(.printable-category) {
+                display: none !important;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 1cm;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Flash Page -->
+<div id="flashPage">
+    <img src="https://i.postimg.cc/YS2yT88h/hokimssb2025.jpg"  alt="Banner Kejohanan Hoki MSSD Bahagian Mukah 2025">
+    <p>Memuatkan sistem...</p>
+</div>
+
+<!-- Main Content -->
+<div class="container no-print" style="display: none;">
+    <header>
+        <img src="https://i.postimg.cc/MTFGgRwx/Chat-GPT-Image-Jun-14-2025-12-09-31-AM.png"  alt="Logo Pertandingan Hoki" class="logo">
+        <h1>Sistem Analisis Pertandingan Hoki</h1>
+        <p>Bahagian Mukah 2025 | 2-3 Julai 2025 | 8:00 pagi - 5:00 petang</p>
+    </header>
+    <div class="top-buttons">
+        <a href="jadual.html" class="btn btn-schedule"><i class="fas fa-calendar-alt"></i> Jadual Perlawanan</a>
+    </div>
+    <section class="category-section no-print">
+        <h2>Kemaskini Keputusan</h2>
+        <div class="input-group">
+            <label for="category">Pilih Kategori:</label>
+            <select id="category"></select>
+        </div>
+        <div class="input-group">
+            <label for="match">Pilih Perlawanan:</label>
+            <select id="match"></select>
+        </div>
+        <div class="input-group">
+            <label for="score1">Skor Pasukan 1:</label>
+            <input type="number" id="score1" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label for="score2">Skor Pasukan 2:</label>
+            <input type="number" id="score2" min="0" value="0">
+        </div>
+        <div class="action-buttons">
+            <button class="btn" id="updateResult">Kemaskini Keputusan</button>
+            <div>
+                <button class="btn btn-accent" id="resetAll">Reset Semua Keputusan</button>
+                <button class="btn btn-print" id="printResults"><i class="fas fa-print"></i> Cetak</button>
+            </div>
+        </div>
+        <div class="result-section" id="resultMessage">
+            Pilih perlawanan dan masukkan keputusan untuk dikemaskini.
+        </div>
+    </section>
+    <div id="categoriesContainer"></div>
+</div>
+
+<!-- Print Sections -->
+<div id="printSections"></div>
+
+<!-- Load external schedule.js before main script -->
+<script src="schedule.js"></script>
+
+<!-- Internal JS -->
+<script>
+    // Slot masa
+    const timeSlots = [
+        '08:00 AM', '08:25 AM', '08:50 AM', '09:15 AM', '09:40 AM',
+        '10:05 AM', '10:30 AM', '10:55 AM', '11:20 AM', '11:45 AM',
+        '02:00 PM', '02:25 PM', '02:50 PM', '03:15 PM', '03:40 PM',
+        '04:05 PM', '04:30 PM', '04:55 PM'
+    ];
+
+    // Tarikh perlawanan
+    const dates = ["2 Julai 2025", "3 Julai 2025"];
+
+    // Tournament data structure
+    const tournamentData = {};
+
+    // Generate matches logic
+    function generateGroupMatches(groupId) {
+        const group = groups[groupId];
+        const matches = [];
+        const teams = group.teams;
+
+        for (let i = 0; i < teams.length; i++) {
+            for (let j = i + 1; j < teams.length; j++) {
+                matches.push({
+                    team1: `${groupId}${i+1}) ${teams[i]}`,
+                    team2: `${groupId}${j+1}) ${teams[j]}`,
+                    score1: null,
+                    score2: null,
+                    completed: false,
+                    groupId: groupId
+                });
+            }
+        }
+
+        let currentDay = 0;
+        let timeSlotIndex = 0;
+        for (const match of matches) {
+            if (timeSlotIndex >= timeSlots.length) {
+                currentDay++;
+                timeSlotIndex = 0;
+                if (currentDay >= dates.length) break;
+            }
+            match.date = dates[currentDay];
+            match.time = timeSlots[timeSlotIndex];
+            timeSlotIndex++;
+        }
+
+        return matches;
+    }
+
+    // Initialize tournament data
+    for (const id in groups) {
+        tournamentData[id] = {
+            name: groups[id].name,
+            teams: groups[id].teams,
+            matches: generateGroupMatches(id),
+            standings: initializeStandings(groups[id].teams)
+        };
+    }
+
+    function initializeStandings(teams) {
+        const standings = {};
+        teams.forEach(team => {
+            standings[team] = {
+                played: 0,
+                wins: 0,
+                draws: 0,
+                losses: 0,
+                goalsFor: 0,
+                goalsAgainst: 0,
+                points: 0
+            };
+        });
+        return standings;
+    }
+
+    function recalculateStandings(groupId) {
+        const data = tournamentData[groupId];
+        data.standings = initializeStandings(data.teams);
+        data.matches.forEach(match => {
+            if (match.completed) {
+                const s = data.standings;
+                const team1 = match.team1.split(') ')[1];
+                const team2 = match.team2.split(') ')[1];
+                const { score1, score2 } = match;
+
+                s[team1].played += 1;
+                s[team1].goalsFor += score1;
+                s[team1].goalsAgainst += score2;
+
+                s[team2].played += 1;
+                s[team2].goalsFor += score2;
+                s[team2].goalsAgainst += score1;
+
+                if (score1 > score2) {
+                    s[team1].wins += 1; s[team1].points += 3;
+                    s[team2].losses += 1;
+                } else if (score1 < score2) {
+                    s[team2].wins += 1; s[team2].points += 3;
+                    s[team1].losses += 1;
+                } else {
+                    s[team1].draws += 1; s[team2].draws += 1;
+                    s[team1].points += 1; s[team2].points += 1;
+                }
+            }
+        });
+    }
+
+    function renderCategory(groupId, container) {
+        const data = tournamentData[groupId];
+        const section = document.createElement('section');
+        section.className = 'category-section printable-category';
+        section.id = `${groupId}Section`;
+        section.innerHTML = `
+            <h2>${data.name}</h2>
+            <div class="matches-container">
+                <h3>Jadual Perlawanan</h3>
+                <table>
+                    <thead><tr>
+                        <th>Perlawanan</th>
+                        <th>Pasukan 1</th>
+                        <th>Pasukan 2</th>
+                        <th>Keputusan</th>
+                    </tr></thead>
+                    <tbody id="${groupId}Matches"></tbody>
+                </table>
+            </div>
+            <div class="standings">
+                <h3>Kedudukan Liga</h3>
+                <table>
+                    <thead><tr>
+                        <th>Nama Pasukan</th>
+                        <th>M</th>
+                        <th>K</th>
+                        <th>S</th>
+                        <th>Gol</th>
+                        <th>Mata</th>
+                    </tr></thead>
+                    <tbody id="${groupId}Standings"></tbody>
+                </table>
+            </div>
+        `;
+        container.appendChild(section);
+    }
+
+    function renderMatches(groupId) {
+        const container = document.getElementById(`${groupId}Matches`);
+        container.innerHTML = '';
+        tournamentData[groupId].matches.forEach((match, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>Perlawanan ${index + 1}</td>
+                <td>${match.team1}</td>
+                <td>${match.team2}</td>
+                <td>${match.completed ? `${match.score1}-${match.score2}` : 'Belum dimainkan'}</td>
+            `;
+            container.appendChild(row);
+        });
+    }
+
+function renderStandings(groupId) {
+    const container = document.getElementById(`${groupId}Standings`);
+    container.innerHTML = '';
+
+    const standings = Object.entries(tournamentData[groupId].standings)
+        .map(([team, stats]) => ({
+            team,
+            ...stats,
+            goalDifference: stats.goalsFor - stats.goalsAgainst
+        }))
+        .sort((a, b) =>
+            b.points - a.points ||
+            b.goalDifference - a.goalDifference ||
+            b.goalsFor - a.goalsFor
+        );
+
+    // Ubah header supaya paparkan Menang (M), Seri (S), Kalah (K)
+    const table = container.parentElement.querySelector('thead');
+    if (table) {
+        table.innerHTML = `
+            <tr>
+                <th>Nama Pasukan</th>
+                <th>Main</th>
+                <th>Menang</th>
+                <th>Seri</th>
+                <th>Kalah</th>
+                <th>Gol/Bolos</th>
+                <th>Mata</th>
+            </tr>
+        `;
+    }
+
+    // Isi baris data
+    standings.forEach(stats => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${stats.team}</td>
+            <td>${stats.played}</td>
+            <td>${stats.wins}</td>
+            <td>${stats.draws}</td>
+            <td>${stats.losses}</td>
+            <td>${stats.goalsFor}-${stats.goalsAgainst}</td>
+            <td>${stats.points}</td>
+        `;
+        container.appendChild(row);
+    });
+}
+
+    function updateMatchDropdown() {
+        const groupId = document.getElementById('category').value;
+        const matchSelect = document.getElementById('match');
+        matchSelect.innerHTML = '';
+        tournamentData[groupId].matches.forEach((match, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = `${match.team1} vs ${match.team2}`;
+            matchSelect.appendChild(option);
+        });
+    }
+
+    function updateMatchResult() {
+        const groupId = document.getElementById('category').value;
+        const matchIndex = parseInt(document.getElementById('match').value);
+        const score1 = parseInt(document.getElementById('score1').value);
+        const score2 = parseInt(document.getElementById('score2').value);
+
+        if (isNaN(score1) || isNaN(score2)) {
+            document.getElementById('resultMessage').innerHTML = '<strong>Error:</strong> Sila masukkan skor yang sah.';
+            return;
+        }
+
+        const match = tournamentData[groupId].matches[matchIndex];
+        match.score1 = score1;
+        match.score2 = score2;
+        match.completed = true;
+
+        recalculateStandings(groupId);
+        renderMatches(groupId);
+        renderStandings(groupId);
+        saveToLocalStorage();
+        document.getElementById('resultMessage').innerHTML = `<strong>Keputusan berjaya dikemaskini!</strong> ${match.team1} ${score1}-${score2} ${match.team2}`;
+    }
+
+    function resetAllResults() {
+        if (confirm('Adakah anda pasti ingin reset semua keputusan?')) {
+            for (const id in tournamentData) {
+                tournamentData[id].matches.forEach(m => {
+                    m.score1 = null;
+                    m.score2 = null;
+                    m.completed = false;
+                });
+                tournamentData[id].standings = initializeStandings(tournamentData[id].teams);
+                renderMatches(id);
+                renderStandings(id);
+            }
+            saveToLocalStorage();
+            document.getElementById('resultMessage').textContent = 'Semua keputusan telah direset.';
+            document.getElementById('score1').value = 0;
+            document.getElementById('score2').value = 0;
+        }
+    }
+
+    function saveToLocalStorage() {
+        localStorage.setItem('tournamentData', JSON.stringify(tournamentData));
+    }
+
+    function loadFromLocalStorage() {
+        const saved = localStorage.getItem('tournamentData');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            for (const id in parsed) {
+                if (tournamentData[id]) {
+                    tournamentData[id].matches = parsed[id].matches;
+                    tournamentData[id].standings = parsed[id].standings;
+                }
+            }
+        }
+    }
+
+    function handlePrint() {
+        const printContainer = document.getElementById('printSections');
+        printContainer.innerHTML = '';
+
+        for (const id in tournamentData) {
+            const section = document.getElementById(`${id}Section`);
+            if (section) {
+                const cloned = section.cloneNode(true);
+                cloned.classList.add('printable-category');
+                printContainer.appendChild(cloned);
+            }
+        }
+
+        window.print();
+
+        window.onafterprint = () => {
+            printContainer.innerHTML = '';
+        };
+    }
+
+    function showMainContent() {
+        const flashPage = document.getElementById('flashPage');
+        const mainContent = document.querySelector('.container');
+        flashPage.style.opacity = '0';
+        setTimeout(() => {
+            flashPage.style.display = 'none';
+            mainContent.style.display = 'block';
+        }, 500);
+    }
+
+    window.addEventListener('load', () => setTimeout(showMainContent, 3000));
+    document.getElementById('flashPage').addEventListener('click', showMainContent);
+
+    // Load UI
+    function initUI() {
+        const categorySelect = document.getElementById('category');
+        for (const id in groups) {
+            const opt = document.createElement('option');
+            opt.value = id;
+            opt.textContent = groups[id].name;
+            categorySelect.appendChild(opt);
+        }
+
+        const container = document.getElementById('categoriesContainer');
+        for (const id in tournamentData) {
+            renderCategory(id, container);
+            renderMatches(id);
+            renderStandings(id);
+        }
+
+        updateMatchDropdown();
+    }
+
+    document.getElementById('category').addEventListener('change', updateMatchDropdown);
+    document.getElementById('updateResult').addEventListener('click', updateMatchResult);
+    document.getElementById('resetAll').addEventListener('click', resetAllResults);
+    document.getElementById('printResults').addEventListener('click', handlePrint);
+    window.addEventListener('DOMContentLoaded', () => {
+        loadFromLocalStorage();
+        initUI();
+    });
+</script>
+
+</body>
+</html>
