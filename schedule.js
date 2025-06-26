@@ -64,11 +64,11 @@ const tournamentSchedule = [
   { no: 22, groupId: 'B', category: 'Perempuan Bawah 15 Tahun (Kumpulan B)', team1: 'B2) SMK BELAWAI', team2: 'B5) SMK DALAT', date: '3 Julai 2025', time: '08:45 AM' },
   { no: 23, groupId: 'C', category: 'Lelaki Bawah 18 Tahun (Kumpulan C)', team1: 'C1) SMK BELAWAI', team2: 'C3) SMK DALAT', date: '3 Julai 2025', time: '09:10 AM' },
   { no: 24, groupId: 'B', category: 'Perempuan Bawah 15 Tahun (Kumpulan B)', team1: 'B3) SMK 3 RIVERS', team2: 'B5) SMK DALAT', date: '3 Julai 2025', time: '09:35 AM' }, 
-  { no: 25, groupId: 'G', category: 'Perempuan Bawah 12 Tahun (Kumpulan G)', team1: 'G2) PASUKAN DALAT', team2: 'G3) PASUKAN MUKAH', date: '3 Julai 2025', time: '10:00 AM' }
+  { no: 25, groupId: 'G', category: 'Perempuan Bawah 12 Tahun (Kumpulan G)', team1: 'G2) PASUKAN DALAT', team2: 'G3) PASUKAN MUKAH', date: '3 Julai 2025', time: '10:00 AM' },
   { no: 26, groupId: 'B', category: 'Perempuan Bawah 15 Tahun (Kumpulan B)', team1: 'B3) SMK 3 RIVERS', team2: 'B5) SMK DALAT', date: '3 Julai 2025', time: '10:25 AM' },
   { no: 27, groupId: 'F', category: 'Lelaki Bawah 12 Tahun (Kumpulan F)', team1: 'F2) PASUKAN DALAT', team2: 'F3) PASUKAN MUKAH', date: '3 Julai 2025', time: '10:50 AM' },
   { no: 28, groupId: 'B', category: 'Perempuan Bawah 15 Tahun (Kumpulan B)', team1: 'B4) SMK MUKAH', team2: 'B5) SMK DALAT', date: '3 Julai 2025', time: '11:15 AM' },
-  { no: 29, groupId: 'C', category: 'Lelaki Bawah 18 Tahun (Kumpulan C)', team1: 'C2) SMK NORMAH', team2: 'C3) SMK DALAT', date: '3 Julai 2025', time: '11:40 AM' },
+  { no: 29, groupId: 'C', category: 'Lelaki Bawah 18 Tahun (Kumpulan C)', team1: 'C2) SMK NORMAH', team2: 'C3) SMK DALAT', date: '3 Julai 2025', time: '11:40 AM' }
 ];
 
 
