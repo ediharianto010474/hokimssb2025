@@ -31,36 +31,34 @@ const groups = {
     }
 };
 
-// Jadwal yang sudah dioptimumkan dari jadual.html
+// Jadwal perlawanan dikemaskini
 const tournamentSchedule = [
-        { no: 1, groupId: 'A', category: 'Lelaki Bawah 15 Tahun (Kumpulan A)', team1: 'A1) SMK BELAWAI', team2: 'A2) SMK NORMAH', date: '2 Julai 2025', time: '08:00 AM' },
-    { no: 2, groupId: 'B', category: 'Perempuan Bawah 15 Tahun (Kumpulan B)', team1: 'B1) SMK BATANG IGAN', team2: 'B2) SMK BELAWAI', date: '2 Julai 2025', time: '08:25 AM' },
-    { no: 3, groupId: 'C', category: 'Lelaki Bawah 18 Tahun (Kumpulan C)', team1: 'C1) SMK BELAWAI', team2: 'C2) SMK NORMAH', date: '2 Julai 2025', time: '08:50 AM' },
-    { no: 4, groupId: 'D', category: 'Lelaki Bawah 18 Tahun (Kumpulan D)', team1: 'D1) SMK MUKAH', team2: 'D2) SMK BATANG IGAN', date: '2 Julai 2025', time: '09:15 AM' },
-    { no: 5, groupId: 'E', category: 'Perempuan Bawah 18 Tahun (Kumpulan E)', team1: 'E1) SMK BELAWAI', team2: 'E2) SMK BATANG IGAN', date: '2 Julai 2025', time: '09:40 AM' },
-    { no: 6, groupId: 'A', category: 'Lelaki Bawah 15 Tahun (Kumpulan A)', team1: 'A3) SMK 3 RIVERS', team2: 'A4) SMK AGAMA IGAN', date: '2 Julai 2025', time: '10:05 AM' },
-    { no: 7, groupId: 'B', category: 'Perempuan Bawah 15 Tahun (Kumpulan B)', team1: 'B3) SMK 3 RIVERS', team2: 'B4) SMK MUKAH', date: '2 Julai 2025', time: '10:30 AM' },
-    { no: 8, groupId: 'D', category: 'Lelaki Bawah 18 Tahun (Kumpulan D)', team1: 'D1) SMK MUKAH', team2: 'D3) SMK AGAMA IGAN', date: '2 Julai 2025', time: '10:55 AM'},
-    { no: 9, groupId: 'E', category: 'Perempuan Bawah 18 Tahun (Kumpulan E)', team1: 'E1) SMK BELAWAI', team2: 'E3) SMK NORMAH', date: '2 Julai 2025', time: '11:20 AM' },
-    { no: 10, groupId: 'B', category: 'Perempuan Bawah 15 Tahun (Kumpulan B)', team1: 'B2) SMK BELAWAI', team2: 'B3) SMK 3 RIVERS', date: '2 Julai 2025', time: '11:45 AM' },
-    { no: 11, groupId: 'A', category: 'Lelaki Bawah 15 Tahun (Kumpulan A)', team1: 'A1) SMK BELAWAI', team2: 'A3) SMK 3 RIVERS', date: '2 Julai 2025', time: '02:00 PM' },
-    { no: 12, groupId: 'D', category: 'Lelaki Bawah 18 Tahun (Kumpulan D)', team1: 'D2) SMK BATANG IGAN', team2: 'D3) SMK AGAMA IGAN', date: '2 Julai 2025', time: '2:25 PM' },
-    { no: 13, groupId: 'B', category: 'Perempuan Bawah 15 Tahun (Kumpulan B)', team1: 'B1) SMK BATANG IGAN', team2: 'B3) SMK 3 RIVERS', date: '2 Julai 2025', time: '02:50 PM' },
-    { no: 14, groupId: 'E', category: 'Perempuan Bawah 18 Tahun (Kumpulan E)', team1: 'E2) SMK BATANG IGAN', team2: 'E3) SMK NORMAH', date: '2 Julai 2025', time: '03:15 PM' },
-    { no: 15, groupId: 'A', category: 'Lelaki Bawah 15 Tahun (Kumpulan A)', team1: 'A2) SMK NORMAH', team2: 'A4) SMK AGAMA IGAN', date: '2 Julai 2025', time: '03:40 PM' },
-    { no: 16, groupId: 'B', category: 'Perempuan Bawah 15 Tahun (Kumpulan B)', team1: 'B2) SMK BELAWAI', team2: 'B4) SMK MUKAH', date: '2 Julai 2025', time: '04:05 PM' },
-    { no: 17, groupId: 'A', category: 'Lelaki Bawah 15 Tahun (Kumpulan A)', team1: 'A1) SMK BELAWAI', team2: 'A4) SMK AGAMA IGAN', date: '2 Julai 2025', time: '04:30 PM' },
-    { no: 18, groupId: 'C', category: 'Lelaki Bawah 18 Tahun (Kumpulan C)', team1: 'C1) SMK BELAWAI', team2: 'C3) SMK DALAT', date: '3 Julai 2025', time: '08:00 AM' },
-    { no: 19, groupId: 'F', category: 'Lelaki Bawah 12 Tahun (Kumpulan F)', team1: 'F1) PASUKAN DARO', team2: 'F2) PASUKAN DALAT', date: '3 Julai 2025', time: '08:25 AM' },
-    { no: 20, groupId: 'G', category: 'Perempuan Bawah 12 Tahun (Kumpulan G)', team1: 'G2) PASUKAN DALAT', team2: 'G3) PASUKAN MUKAH', date: '3 Julai 2025', time: '08:50 AM' },
-    { no: 21, groupId: 'F', category: 'Lelaki Bawah 12 Tahun (Kumpulan F)', team1: 'F2) PASUKAN DALAT', team2: 'F3) PASUKAN MUKAH', date: '3 Julai 2025', time: '09:15 AM' },
-    { no: 22, groupId: 'G', category: 'Perempuan Bawah 12 Tahun (Kumpulan G)', team1: 'G1) PASUKAN DARO', team2: 'G2) PASUKAN DALAT', date: '3 Julai 2025', time: '09:40 AM' },
-    { no: 23, groupId: 'C', category: 'Lelaki Bawah 18 Tahun (Kumpulan C)', team1: 'C2) SMK NORMAH', team2: 'C3) SMK DALAT', date: '3 Julai 2025', time: '10:05 AM' },
-    { no: 24, groupId: 'B', category: 'Perempuan Bawah 15 Tahun (Kumpulan B)', team1: 'B1) SMK BATANG IGAN', team2: 'B4) SMK MUKAH', date: '3 Julai 2025', time: '10:30 AM' },
-    { no: 25, groupId: 'F', category: 'Lelaki Bawah 12 Tahun (Kumpulan F)', team1: 'F1) PASUKAN DARO', team2: 'F3) PASUKAN MUKAH', date: '3 Julai 2025', time: '10:55 AM' },
-    { no: 26, groupId: 'A', category: 'Lelaki Bawah 15 Tahun (Kumpulan A)', team1: 'A2) SMK NORMAH', team2: 'A3) SMK 3 RIVERS', date: '3 Julai 2025', time: '11:20 AM' },
-    { no: 27, groupId: 'G', category: 'Perempuan Bawah 12 Tahun (Kumpulan G)', team1: 'G1) PASUKAN DARO', team2: 'G3) PASUKAN MUKAH', date: '3 Julai 2025', time: '11:45 AM' }
+    { no: 1, groupId: 'A', category: groups.A.name, team1: 'A1) SMK BELAWAI', team2: 'A2) SMK NORMAH', date: '2 Julai 2025', time: '07:30 AM' },
+    { no: 2, groupId: 'A', category: groups.A.name, team1: 'A3) SMK MUKAH', team2: 'A4) SMK AGAMA IGAN', date: '2 Julai 2025', time: '08:00 AM' },
+    { no: 3, groupId: 'B', category: groups.B.name, team1: 'B1) SMK BATANG IGAN', team2: 'B2) SMK BELAWAI', date: '2 Julai 2025', time: '08:30 AM' },
+    { no: 4, groupId: 'D', category: groups.D.name, team1: 'D1) SMK 3 RIVERS', team2: 'D2) SMK BATANG IGAN', date: '2 Julai 2025', time: '09:00 AM' },
+    { no: 5, groupId: 'E', category: groups.E.name, team1: 'E1) SMK BELAWAI', team2: 'E2) SMK BATANG IGAN', date: '2 Julai 2025', time: '09:30 AM' },
+    { no: 6, groupId: 'D', category: groups.D.name, team1: 'D3) SMK AGAMA IGAN', team2: 'D1) SMK 3 RIVERS', date: '2 Julai 2025', time: '10:00 AM' },
+    { no: 7, groupId: 'B', category: groups.B.name, team1: 'B3) SMK 3 RIVERS', team2: 'B4) SMK MUKAH', date: '2 Julai 2025', time: '10:30 AM' },
+    { no: 8, groupId: 'E', category: groups.E.name, team1: 'E3) SMK NORMAH', team2: 'E1) SMK BELAWAI', date: '2 Julai 2025', time: '11:00 AM' },
+    { no: 9, groupId: 'B', category: groups.B.name, team1: 'B2) SMK BELAWAI', team2: 'B3) SMK 3 RIVERS', date: '2 Julai 2025', time: '11:30 AM' },
+    { no: 10, groupId: 'A', category: groups.A.name, team1: 'A1) SMK BELAWAI', team2: 'A3) SMK MUKAH', date: '2 Julai 2025', time: '01:00 PM' },
+    { no: 11, groupId: 'D', category: groups.D.name, team1: 'D2) SMK BATANG IGAN', team2: 'D3) SMK AGAMA IGAN', date: '2 Julai 2025', time: '01:30 PM' },
+    { no: 12, groupId: 'E', category: groups.E.name, team1: 'E2) SMK BATANG IGAN', team2: 'E3) SMK NORMAH', date: '2 Julai 2025', time: '02:00 PM' },
+    { no: 13, groupId: 'A', category: groups.A.name, team1: 'A2) SMK NORMAH', team2: 'A4) SMK AGAMA IGAN', date: '2 Julai 2025', time: '02:30 PM' },
+
+    // Semua perlawanan melibatkan DALAT disusun pada 3 Julai
+    { no: 14, groupId: 'C', category: groups.C.name, team1: 'C1) SMK BELAWAI', team2: 'C3) SMK DALAT', date: '3 Julai 2025', time: '07:30 AM' },
+    { no: 15, groupId: 'B', category: groups.B.name, team1: 'B5) SMK DALAT', team2: 'B4) SMK MUKAH', date: '3 Julai 2025', time: '08:00 AM' },
+    { no: 16, groupId: 'C', category: groups.C.name, team1: 'C2) SMK NORMAH', team2: 'C3) SMK DALAT', date: '3 Julai 2025', time: '08:30 AM' },
+    { no: 17, groupId: 'F', category: groups.F.name, team1: 'F1) PASUKAN DARO', team2: 'F2) PASUKAN DALAT', date: '3 Julai 2025', time: '09:00 AM' },
+    { no: 18, groupId: 'G', category: groups.G.name, team1: 'G2) PASUKAN DALAT', team2: 'G3) PASUKAN MUKAH', date: '3 Julai 2025', time: '09:30 AM' },
+    { no: 19, groupId: 'F', category: groups.F.name, team1: 'F2) PASUKAN DALAT', team2: 'F3) PASUKAN MUKAH', date: '3 Julai 2025', time: '10:00 AM' },
+    { no: 20, groupId: 'G', category: groups.G.name, team1: 'G1) PASUKAN DARO', team2: 'G2) PASUKAN DALAT', date: '3 Julai 2025', time: '10:30 AM' },
+    { no: 21, groupId: 'B', category: groups.B.name, team1: 'B5) SMK DALAT', team2: 'B1) SMK BATANG IGAN', date: '3 Julai 2025', time: '11:00 AM' },
+    { no: 22, groupId: 'G', category: groups.G.name, team1: 'G1) PASUKAN DARO', team2: 'G3) PASUKAN MUKAH', date: '3 Julai 2025', time: '11:30 AM' }
 ];
+
 // Fungsi untuk mendapatkan jadwal berdasarkan groupId
 function getMatchesByGroup(groupId) {
     return tournamentSchedule.filter(match => match.groupId === groupId);
