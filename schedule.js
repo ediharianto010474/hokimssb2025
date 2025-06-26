@@ -3,11 +3,11 @@
 const groups = {
     'A': {
         name: 'Lelaki Bawah 15 Tahun (Kumpulan A)',
-        teams: ['SMK BELAWAI', 'SMK NORMAH', 'SMK 3 RIVERS', 'SMK AGAMA IGAN']
+        teams: ['SMK BELAWAI', 'SMK NORMAH', 'SMK MUKAH', 'SMK AGAMA IGAN']
     },
     'B': {
         name: 'Perempuan Bawah 15 Tahun (Kumpulan B)',
-        teams: ['SMK BATANG IGAN', 'SMK BELAWAI', 'SMK 3 RIVERS', 'SMK MUKAH']
+        teams: ['SMK BATANG IGAN', 'SMK BELAWAI', 'SMK 3 RIVERS', 'SMK MUKAH', 'SMK DALAT']
     },
     'C': {
         name: 'Lelaki Bawah 18 Tahun (Kumpulan C)',
@@ -15,7 +15,7 @@ const groups = {
     },
     'D': {
         name: 'Lelaki Bawah 18 Tahun (Kumpulan D)',
-        teams: ['SMK MUKAH', 'SMK BATANG IGAN', 'SMK AGAMA IGAN']
+        teams: ['SMK 3 RIVERS', 'SMK BATANG IGAN', 'SMK AGAMA IGAN']
     },
     'E': {
         name: 'Perempuan Bawah 18 Tahun (Kumpulan E)',
